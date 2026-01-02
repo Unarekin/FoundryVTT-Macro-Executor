@@ -1,6 +1,7 @@
 import { execMacro as execMacroFromDirectory } from "./directory";
 import { execMacro as execMacroFromCompendium } from "./compendium";
 import { LocalizedError } from "errors";
+import "./settings";
 
 Hooks.on("getMacroContextOptions", (app: MacroDirectory, entries: foundry.applications.ux.ContextMenu.Entry<HTMLLIElement>[]) => {
   entries.push({
@@ -10,7 +11,7 @@ Hooks.on("getMacroContextOptions", (app: MacroDirectory, entries: foundry.applic
     // from compendia that have not been properly loaded (since this function cannot be async)
     // And also realistically, if the user has the ability to SEE this menu, then they have
     // sufficient permission to run the macro.
-    condition: () => true,
+    condition: () => !!game?.settings?.get(__MODULE_ID__, "addToContextMenu"),
     callback: (li: HTMLLIElement) => {
       const { entryId, packId } = li.dataset;
       if (typeof entryId !== "string") throw new LocalizedError("MACRONOTFOUND", { id: typeof entryId });
