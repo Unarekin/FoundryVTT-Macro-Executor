@@ -13,10 +13,9 @@ Hooks.once("ready", () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       (foundry as any).ui.macros.render();
       const apps = getCompendiumApps();
-      console.log("Apps:", apps, apps.filter(app => app.rendered));
       apps
-      .filter(app => app.rendered)
-      .forEach(app => { void app.render(); });
+        .filter(app => app.rendered)
+        .forEach(app => { void app.render(); });
     }
   });
 
@@ -28,5 +27,8 @@ Hooks.once("ready", () => {
     type: Boolean,
     default: true,
     requiresReload: false,
-  })
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  (foundry as any).ui.macros.render();
 })
