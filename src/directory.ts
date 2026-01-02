@@ -4,6 +4,7 @@ import { LocalizedError } from "./errors";
 Hooks.on("renderMacroDirectory", (app: MacroDirectory, html: HTMLElement) => {
   const listItems = Array.from<HTMLElement>(html.querySelectorAll(`li.entry.macro`));
   listItems.forEach(li => {
+    if (!(game.settings?.settings.get(`${__MODULE_ID__}.addToListItem`) && game?.settings?.get(__MODULE_ID__, "addToListItem"))) return;
     const entryId = li.dataset.entryId;
     if (typeof entryId === "string") {
       const link = createExecuteButton(entryId)

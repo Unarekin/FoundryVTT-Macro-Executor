@@ -3,8 +3,8 @@ import { createExecuteButton } from "./functions";
 
 Hooks.on("renderCompendium", (compendium: foundry.applications.sidebar.apps.Compendium, html: HTMLElement) => {
   const listItems = Array.from<HTMLElement>(html.querySelectorAll(`li.entry.macro`));
-  console.log("Rendering compendium:", compendium, listItems)
   listItems.forEach(li => {
+    if (!(game.settings?.settings.get(`${__MODULE_ID__}.addToListItem`) && game?.settings?.get(__MODULE_ID__, "addToListItem"))) return;
     const entryId = li.dataset.entryId;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
     const packId = (compendium as any).collection?.metadata?.id;

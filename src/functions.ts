@@ -11,3 +11,7 @@ export function createExecuteButton(id: string): HTMLAnchorElement {
 
   return link;
 }
+
+export function getCompendiumApps(): foundry.applications.sidebar.apps.Compendium[] {
+  return (game.packs?.contents.flatMap(pack => pack.apps) as foundry.applications.sidebar.apps.Compendium[]) ?? [];
+}
